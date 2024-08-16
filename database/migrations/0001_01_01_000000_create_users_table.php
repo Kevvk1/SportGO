@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('fecha_nacimiento');
             $table->string('sexo');
             $table->string('password');
+            $table->string('type')->default('user');
             $table->timestamps();
             $table->rememberToken();
         });

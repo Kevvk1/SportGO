@@ -4,7 +4,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-3">
-                    <img src="{{ asset('img/sportgo.png') }}" class="img-fluid logo" style="width: 50%;">   
+                    <a href="{{ route('index') }}">
+                        <img src="{{ asset('img/sportgo.png') }}" class="img-fluid logo" style="width: 50%;">
+                    </a>
                 </div>
                 <div class="col-6">
                     <form class="d-flex" role="search" style="width: auto; height: auto;">   

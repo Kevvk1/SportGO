@@ -47,12 +47,20 @@ Route::post('/email-verification', function (Request $request) {
 Route::post('/logout', [AuthControl::class, 'logoutUser'])->name('logout.user')->middleware(['auth']);
 
 
+Route::get('/error', function () {
+    return view('error');
+})->name('error');
+
+Route::fallback(function(){
+    return view('error');
+});
+
 Route::get('/admin/index', function () {
     return view('admin/index');
-})->name('admin');
+})->name('admin')->middleware(['isAdmin']);
 
 Route::get('/admin/cargar', function () {
     return view('admin/cargar');
-})->name('admin.cargar');
+})->name('admin.cargar')->middleware(['isAdmin']);
 
-Route::post('/admin/cargar', [ProductController::class, 'cargar'])->name('producto.cargar');
+Route::post('/admin/cargar', [ProductController::class, 'cargar'])->name('producto.cargar')->middleware(['isAdmin']);
