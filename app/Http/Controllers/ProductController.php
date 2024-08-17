@@ -15,6 +15,11 @@ class ProductController extends Controller
         return view('productos', compact('productos'));
     }
 
+    public function indexAdmin(){
+        $productos = Productos::all();
+        return view('admin/listado', compact('productos'));
+    }
+
     public function cargar(Request $request){
 
         $validatedData = $request -> validate([
@@ -43,7 +48,92 @@ class ProductController extends Controller
 
         return redirect()->route('admin.cargar')->withSuccess("Producto cargado exitosamente");
 
+    }
+
+    public function eliminar(Request $request){
+
+        $codigo_producto = $request -> input('codigo_producto');
+
+        $producto = Productos::find($codigo_producto);
+
+        Log::info("A eliminar:");
+        Log::emergency($producto);
+
+        if($producto){
+            $producto->delete();
+
+            return redirect()->back()->with('success', 'Producto eliminado correctamente');
+        }
+
         
+    }
+
+    
+    public function addToCart(Request $request){
+
+        $cantidad = 1;
+
+        $codigo_producto = $request -> input('codigo_producto');
+
+        //Obtiene json de informacion del producto de la base de datos
+        $producto = Productos::find($codigo_producto);
+
+        if(!$producto){
+            return redirect()->back()->with('error', 'No se encontro el producto');
+        }
+
+        //Obtiene el carrito actual de la sesion
+        $carrito = session()->get('carrito', []);
+
+        //Ya existe el producto en el carrito actual?
+        $existe = array_key_exists("producto_".$codigo_producto, $carrito);
+
+        //Si existe, le sumo 1 de cantidad
+        if($existe){
+            
+            $producto = $carrito["producto_".$codigo_producto];
+
+            $producto["cantidad"]+=1;
+
+            $carrito["producto_".$codigo_producto] = $producto;
+
+            session(['carrito' => $carrito]);
+            
+        }
+        //Sino, agrego el item al carrito
+        else{
+            //Crea array con el producto, actua de carrito
+            $carrito["producto_".$codigo_producto] = [
+                'codigo' => $producto->codigo_producto,
+                'nombre' => $producto->nombre,
+                'precio' => $producto->precio,
+                'cantidad' => $cantidad,
+                'imagen'=> $producto->imagen
+            ];
+
+            session()->put('carrito', $carrito);
+
+        }
+
+        
+        return redirect()->back()->with('success', 'Producto agregado al carrito');
+    }
+
+
+    public function getCurrentCart(Request $request){
+
+        $carrito = session('carrito', []);
+
+        return view('carrito')->with('carrito', $carrito);
+    }
+
+    public function deleteCurrentCart(Request $request){
+
+        $carrito = session('carrito', []);
+
+        $carrito = session()->forget('carrito');
+
+        return view('carrito')->with('carrito', $carrito);
     }
 
 

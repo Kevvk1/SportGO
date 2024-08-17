@@ -51,6 +51,12 @@ Route::get('/error', function () {
     return view('error');
 })->name('error');
 
+Route::get('/carrito', [ProductController::class, 'getCurrentCart']);
+
+Route::post('/productos', [ProductController::class, 'addToCart'])->name('añadir.al.carrito');
+
+Route::post('/carrito', [ProductController::class, 'deleteCurrentCart'])->name('eliminar.carrito');
+
 Route::fallback(function(){
     return view('error');
 });
@@ -64,3 +70,10 @@ Route::get('/admin/cargar', function () {
 })->name('admin.cargar')->middleware(['isAdmin']);
 
 Route::post('/admin/cargar', [ProductController::class, 'cargar'])->name('producto.cargar')->middleware(['isAdmin']);
+
+Route::get('/admin/listado', [ProductController::class, 'indexAdmin'], function () {
+    return view('admin/listado');
+})->name('admin.listado.productos')->middleware(['isAdmin']);
+
+Route::post('/admin/listado', [ProductController::class, 'eliminar'])->name('producto.eliminar')->middleware(['isAdmin']);
+

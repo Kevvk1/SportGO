@@ -10,7 +10,7 @@
                     <h6 class="text-uppercase fw-bold mb-4">
                         <img src="{{ asset('img/sportgo.png') }}" class="img-fluid logo" style="width: 70%;">
                     </h6>
-                    <p style="color: white;"><i class="fas fa-home me-3" style="color: white;"></i>Av. Cabildo 2070 - Ciudad Autónoma de Buenos Aires (C1428), Argentina</p>
+                    <p style="color: white;"><i class="fas fa-home me-3" style="color: white;"></i>Av. Rivadavia 17327 - Morón (B1708), Provincia de Buenos Aires, Argentina</p>
                     <p style="color: white;">
                         <i class="fas fa-envelope me-3" style="color: white;"></i>
                         contacto@sportgo.com

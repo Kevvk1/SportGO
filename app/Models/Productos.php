@@ -14,6 +14,10 @@ class Productos extends Model
      *
      * @var array<int, string>
      */
+
+    protected $table = 'productos';
+
+    
     protected $fillable = [
         'codigo_producto',
         'nombre',
@@ -22,4 +26,12 @@ class Productos extends Model
         'imagen',
         'stock_disponible',
     ];
+
+    protected $hidden = ['type'];
+
+    protected $primaryKey = 'codigo_producto';
+
+    public $incrementing = false;
+
+    protected $keyType = 'integer';
 }
