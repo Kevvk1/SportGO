@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthControl;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserControl;
+use App\Http\Controllers\PedidosController;
 
 //Route::get('/', function () {
     //return view('index');
@@ -85,3 +86,6 @@ Route::post('/admin/listado/eliminar', [ProductController::class, 'eliminar'])->
 Route::get('/admin/usuarios', [UserControl::class, 'index'])->name('admin.listado')->middleware(['isAdmin']);
 
 Route::post('/admin/usuarios', [UserControl::class, 'cambiarTipo'])->name('admin.cambiar.usuario')->middleware(['isAdmin']);
+
+Route::get('/admin/pedidos', [PedidosController::class, 'indexAdmin'])->name('admin.listado.pedidos')->middleware(['isAdmin']);
+
