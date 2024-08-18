@@ -3,22 +3,25 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthControl;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserControl;
 
-Route::get('/', function () {
-    return view('index');
-});
+//Route::get('/', function () {
+    //return view('index');
+//});
 
-Route::get('/index', function () {
-    return view('index');
-}) -> name('index');
 
-Route::get('/productos', [ProductController::class, 'index']);
+
+Route::get('/index', [ProductController::class, 'index'])->name('index');
 
 Route::post('/index', [AuthControl::class, 'process'])->name('process.user');
 
 Route::get('/login', function () {
     return view('login');
 }) -> name('login');
+
+Route::get('/register', function () {
+    return view('register');
+}) -> name('register');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
@@ -53,7 +56,9 @@ Route::get('/error', function () {
 
 Route::get('/carrito', [ProductController::class, 'getCurrentCart']);
 
-Route::post('/productos', [ProductController::class, 'addToCart'])->name('añadir.al.carrito');
+Route::get('/getProducto/{codigo_producto}', [ProductController::class, 'getProducto'])->middleware(['isAdmin']);
+
+Route::post('/productos', [ProductController::class, 'verifyCart'])->name('añadir.al.carrito');
 
 Route::post('/carrito', [ProductController::class, 'deleteCurrentCart'])->name('eliminar.carrito');
 
@@ -71,9 +76,12 @@ Route::get('/admin/cargar', function () {
 
 Route::post('/admin/cargar', [ProductController::class, 'cargar'])->name('producto.cargar')->middleware(['isAdmin']);
 
-Route::get('/admin/listado', [ProductController::class, 'indexAdmin'], function () {
-    return view('admin/listado');
-})->name('admin.listado.productos')->middleware(['isAdmin']);
+Route::get('/admin/listado', [ProductController::class, 'indexAdmin'])->name('admin.listado.productos')->middleware(['isAdmin']);
 
-Route::post('/admin/listado', [ProductController::class, 'eliminar'])->name('producto.eliminar')->middleware(['isAdmin']);
+Route::post('/admin/listado/modificar', [ProductController::class, 'modificar'])->name('producto.modificar')->middleware(['isAdmin']);
 
+Route::post('/admin/listado/eliminar', [ProductController::class, 'eliminar'])->name('producto.eliminar')->middleware(['isAdmin']);
+
+Route::get('/admin/usuarios', [UserControl::class, 'index'])->name('admin.listado')->middleware(['isAdmin']);
+
+Route::post('/admin/usuarios', [UserControl::class, 'cambiarTipo'])->name('admin.cambiar.usuario')->middleware(['isAdmin']);

@@ -82,7 +82,7 @@ class AuthControl extends Controller
 
             $request -> session() -> put('user', $user); // Almaceno al usuario en la sesion persistente
 
-            return redirect()->intended('/')->withSuccess("Sesión iniciada correctamente");
+            return redirect()->intended('index')->withSuccess("Sesión iniciada correctamente");
         }
 
         return redirect("index")->withSuccess("Los datos ingresados no coinciden con nuestro sistema");

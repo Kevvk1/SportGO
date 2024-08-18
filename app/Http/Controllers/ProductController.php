@@ -12,12 +12,50 @@ class ProductController extends Controller
     
     public function index(){
         $productos = Productos::all();
-        return view('productos', compact('productos'));
+        return view('index', compact('productos'));
     }
 
     public function indexAdmin(){
         $productos = Productos::all();
         return view('admin/listado', compact('productos'));
+    }
+
+    public function getProducto($codigo_producto){
+        $producto = Productos::find($codigo_producto);
+
+        if(!$producto){
+            return response()->json([
+                'error' => 'No se encontro el producto'
+            ], 404);
+        }
+        else{
+            return response()->json([$producto]);
+        }
+    }
+
+    public function modificar(Request $request){
+
+        //Agregar validaciones de datos
+
+
+        $codigo_producto = $request -> input('codigo_producto_modal');
+
+        $producto = Productos::find($codigo_producto);
+
+
+        if(!$producto){
+            return redirect()->back()->with('error', 'No se encontro el producto');
+        }
+
+        $producto->codigo_producto = $request->codigo_producto_modal;
+        $producto->nombre = $request->nombre_producto_modal;
+        $producto->precio = $request->precio_producto_modal;
+        $producto->stock_disponible = $request->cantidad_producto_modal;
+
+        $producto -> save();
+
+
+        return redirect()->back()->with('success', 'Producto modificado exitosamente');
     }
 
     public function cargar(Request $request){
@@ -56,9 +94,6 @@ class ProductController extends Controller
 
         $producto = Productos::find($codigo_producto);
 
-        Log::info("A eliminar:");
-        Log::emergency($producto);
-
         if($producto){
             $producto->delete();
 
@@ -67,6 +102,44 @@ class ProductController extends Controller
 
         
     }
+
+    
+    public function verifyCart(Request $request){
+        $codigo_producto = $request -> input('codigo_producto');
+
+        $producto = Productos::find($codigo_producto);
+
+        if(!$producto){
+            return redirect()->back()->with('error', 'No se encontro el producto');
+        }
+
+        //Obtiene el carrito actual de la sesion
+        $carrito = session()->get('carrito', ['carrito' => ['productos' => [], 'total_a_pagar' => 0]]);
+
+        //Ya existe el producto en el carrito actual?
+        $existe = array_key_exists("producto_".$codigo_producto, $carrito["carrito"]["productos"]);
+
+        //Si existe, modifica la cantidad y le suma uno
+        if($existe){
+                        
+            $producto = $carrito["carrito"]["productos"]["producto_".$codigo_producto];
+
+            $producto["cantidad"]+=1;
+
+            $producto["precio_total"] = $producto["precio_unitario"] * $producto["cantidad"];
+
+            $carrito["carrito"]["productos"]["producto_".$codigo_producto] = $producto;
+
+            session(['carrito' => $carrito]);
+        }
+        //Sino, llama a la funcion para agregarlo al carrito
+        else{
+            return $this->addToCart($request);
+        }
+
+        return redirect()->back()->with('success', 'Producto agregado al carrito');
+    }
+
 
     
     public function addToCart(Request $request){
@@ -83,37 +156,20 @@ class ProductController extends Controller
         }
 
         //Obtiene el carrito actual de la sesion
-        $carrito = session()->get('carrito', []);
+        $carrito = session()->get('carrito', ['carrito' => ['productos' => [], 'total_a_pagar' => 0]]);
 
-        //Ya existe el producto en el carrito actual?
-        $existe = array_key_exists("producto_".$codigo_producto, $carrito);
 
-        //Si existe, le sumo 1 de cantidad
-        if($existe){
-            
-            $producto = $carrito["producto_".$codigo_producto];
+        //Crea array con el producto
+        $carrito["carrito"]["productos"]["producto_".$codigo_producto] = [
+            'codigo' => $producto->codigo_producto,
+            'nombre' => $producto->nombre,
+            'precio_unitario' => $producto->precio,
+            'precio_total' => ($cantidad*($producto->precio)),
+            'cantidad' => $cantidad,
+            'imagen'=> $producto->imagen
+        ];
 
-            $producto["cantidad"]+=1;
-
-            $carrito["producto_".$codigo_producto] = $producto;
-
-            session(['carrito' => $carrito]);
-            
-        }
-        //Sino, agrego el item al carrito
-        else{
-            //Crea array con el producto, actua de carrito
-            $carrito["producto_".$codigo_producto] = [
-                'codigo' => $producto->codigo_producto,
-                'nombre' => $producto->nombre,
-                'precio' => $producto->precio,
-                'cantidad' => $cantidad,
-                'imagen'=> $producto->imagen
-            ];
-
-            session()->put('carrito', $carrito);
-
-        }
+        session()->put('carrito', $carrito);
 
         
         return redirect()->back()->with('success', 'Producto agregado al carrito');
@@ -122,7 +178,21 @@ class ProductController extends Controller
 
     public function getCurrentCart(Request $request){
 
-        $carrito = session('carrito', []);
+        $total = 0;
+
+        //Carrito actual
+        $carrito = session()->get('carrito', ['carrito' => ['productos' => [], 'total_a_pagar' => 0]]);
+
+        //Recorrido sobre los productos para sumar el precio total de cada uno
+        foreach($carrito["carrito"]["productos"] as $producto){
+            $total += $producto["precio_total"];
+        }
+
+        //Actualizo total a pagar
+        $carrito["carrito"]["total_a_pagar"] = $total;
+
+        //Pusheo carrito actualizado a la sesion
+        session(['carrito' => $carrito]);
 
         return view('carrito')->with('carrito', $carrito);
     }
