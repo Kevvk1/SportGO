@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthControl;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserControl;
 use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\VentasController;
 
 //Route::get('/', function () {
     //return view('index');
@@ -73,18 +74,21 @@ Route::get('/admin/cargar', function () {
 Route::post('/admin/cargar', [ProductController::class, 'cargar'])->name('producto.cargar')->middleware(['isAdmin']);
 
 Route::get('/admin/listado', [ProductController::class, 'indexAdmin'])->name('admin.listado.productos')->middleware(['isAdmin']);
+
 Route::post('/admin/listado/modificar', [ProductController::class, 'modificar'])->name('producto.modificar')->middleware(['isAdmin']);
+
 Route::post('/admin/listado/eliminar', [ProductController::class, 'eliminar'])->name('producto.eliminar')->middleware(['isAdmin']);
 
 Route::get('/admin/usuarios', [UserControl::class, 'index'])->name('admin.listado')->middleware(['isAdmin']);
 Route::post('/admin/usuarios', [UserControl::class, 'cambiarTipo'])->name('admin.cambiar.usuario')->middleware(['isAdmin']);
 
-Route::get('/admin/pedidos/pendientes', [PedidosController::class, 'indexAdminPendientes'])->name('admin.listado.pedidos.pendientes')->middleware(['isAdmin']);
-Route::get('/admin/pedidos/historico', [PedidosController::class, 'indexAdminHistorico'])->name('admin.listado.pedidos.historico')->middleware(['isAdmin']);
+Route::get('/admin/pedidos/pendientes', [PedidosController::class, 'indexAdmin'])->name('admin.listado.pedidos.pendientes')->middleware(['isAdmin']);
+Route::get('/admin/pedidos/historico', [PedidosController::class, 'indexAdmin'])->name('admin.listado.pedidos.historico')->middleware(['isAdmin']);
 
-Route::get('/checkout', function () {
-    return view('checkout');
-})->name('checkout');
+Route::get('/admin/estadocuenta', [VentasController::class, 'index'])->name('estado.cuenta')->middleware(['isAdmin']);
+
+Route::get('/checkout', [ProductController::class, 'getCurrentCart'])->name('checkout');
+
 Route::post('/checkout/crear', [PedidosController::class, 'create'])->name('pedido.crear');
 
 Route::get('/pedidos', [PedidosController::class, 'index'])->name('listado.pedidos');
@@ -92,7 +96,7 @@ Route::get('/pedidos', [PedidosController::class, 'index'])->name('listado.pedid
 Route::post('/admin/pedidos/eliminar', [PedidosController::class, 'eliminar'])->name('pedido.eliminar');
 Route::post('/admin/pedidos/entregar', [PedidosController::class, 'entregar'])->name('pedido.entregar');
 
-Route::get('/getProductosPedido/{id_pedido}', [PedidosController::class, 'getProductosPedido'])->middleware(['isAdmin']);
+Route::get('/getProductosPedido/{id_pedido}', [PedidosController::class, 'getProductosPedido'])->name('pedido.obtener.productos');
 
 
 

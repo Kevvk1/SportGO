@@ -49,5 +49,11 @@ class Pedidos extends Model
     public function pedidoFinalizado(){
         return $this->hasOne(PedidosFinalizados::class, 'id_pedido', 'id_pedido');
     }
+
+    // Relación con el modelo Venta
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class, 'id_pedido', 'id_pedido');
+    }
 }
 

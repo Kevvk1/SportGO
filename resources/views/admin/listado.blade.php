@@ -92,15 +92,15 @@
                             <div class="container">
                                 <div class="row">
 
-                                    <form id="modifyProduct-form" action="{{ route('producto.modificar') }}" method="POST">
-                                        @csrf
-                                        <div class="col-4">
-                                            <img src="" class="img-fluid" id="imagen_producto_modal" name="imagen_producto_modal" style="height: 20em; width: 15em;">
-                                        </div>
                                         <div class="col-8">
                                             <div class="d-block">
                                                 <label for="nombre_producto_modal">Nombre</label>
                                                 <input type="text" style="border: 1px solid white; border-radius: 15px; background-color: white;" name="nombre_producto_modal" id="nombre_producto_modal" class="p-1" value="None">
+                                            </div>
+
+                                            <div class="d-block">
+                                                <label for="descripcion_producto_modal">Descripcion</label>
+                                                <input type="text" style="border: 1px solid white; border-radius: 15px; background-color: white;" name="descripcion_producto_modal" id="descripcion_producto_modal" class="p-1" value="None">
                                             </div>
 
                                             <div class="row">

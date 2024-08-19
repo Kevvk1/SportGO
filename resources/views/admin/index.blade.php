@@ -12,7 +12,7 @@
                 <button type="button" class="btn btn-primary" onclick="location.href='/admin/usuarios'">Consultar listado de usuarios</button>
                 <button type="button" class="btn btn-primary" onclick="location.href='/admin/pedidos/pendientes'">Ver pedidos pendientes</button>
                 <button type="button" class="btn btn-primary" onclick="location.href='/admin/pedidos/historico'">Ver historico de pedidos</button>
-                <button type="button" class="btn btn-primary">Ver estado de cuenta</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/admin/estadocuenta'">Ver estado de cuenta</button>
             </div>
         </div>
     </div>

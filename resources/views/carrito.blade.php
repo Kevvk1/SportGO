@@ -114,17 +114,19 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="container mt-3 text-end">
-            <button class="btn" style="border-radius: 10px; background-color: #d9db26;" onclick='location.href="/checkout"'>FINALIZAR COMPRA</button>
+    @if($carrito)
+        <div class="row">
+            <div class="container mt-3 text-end">
+                <button class="btn" style="border-radius: 10px; background-color: #d9db26;" onclick='location.href="/checkout"'>FINALIZAR COMPRA</button>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="container mt-3 text-end">
-            <button class="btn" style="border-radius: 10px; background-color: #red;" onclick="document.getElementById('deleteCart-form').submit(); return false;">ELIMINAR CARRITO</button>
+        <div class="row">
+            <div class="container mt-3 text-end">
+                <button class="btn" style="border-radius: 10px; background-color: #red;" onclick="document.getElementById('deleteCart-form').submit(); return false;">ELIMINAR CARRITO</button>
+            </div>
         </div>
-    </div>
+    @endif
     
     <form id="deleteCart-form" action="{{ route('eliminar.carrito') }}" method="POST">
         @csrf

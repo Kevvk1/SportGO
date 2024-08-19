@@ -8,6 +8,7 @@ use App\Models\Pedidos;
 use App\Models\User;
 use App\Models\PedidosPendientes;
 use App\Models\PedidosFinalizados;
+use App\Models\Ventas;
 
 
 class PedidosController extends Controller
@@ -23,17 +24,21 @@ class PedidosController extends Controller
     }
 
 
-    public function indexAdminPendientes(){
-        $pedidos = Pedidos::where('estado', "Pendiente de entrega")->get();
-        return view('admin/pedidos', compact('pedidos'));
-    }
+    public function indexAdmin(Request $request){
 
-    public function indexAdminHistorico(){
-        $pedidos = Pedidos::where('estado', "Entregado")->get();
-        return view('admin/pedidos_historico', compact('pedidos'));
+        if($request->path()=="admin/pedidos/pendientes"){
+            $pedidos = Pedidos::where('estado', "Pendiente de entrega")->get();
+            return view('admin/pedidos', compact('pedidos'));
+        }
+        else if($request->path()=="admin/pedidos/historico"){
+            $pedidos = Pedidos::where('estado', "Entregado")->get();
+            return view('admin/pedidos_historico', compact('pedidos'));
+        }
+
     }
 
     public function create(Request $request){
+
 
         //Obtengo user de la sesion
         $id_usuario = session()->get('user', [])->id_usuario;
@@ -67,6 +72,23 @@ class PedidosController extends Controller
                 'cantidad' => $producto["cantidad"]
             ]);
         }
+
+        //Creo venta
+        $venta = Ventas::create([
+            'id_usuario' => $pedido->id_usuario,
+            'id_pedido' => $pedido->id_pedido,
+            'nombre_apellido' => ($request->input('nombre_apellido')),
+            'calle_cliente' => ($request->input('calle')),
+            'calle_altura_cliente' => ($request->input('altura')),
+            'provincia' => ($request->input('provincia')),
+            'localidad' => ($request->input('localidad')),
+            'codigo_postal' => ($request->input('codigo_postal')),
+            'piso_departamento' => ($request->input('piso_departamento')),
+            'metodo_pago' => "Tarjeta de credito",
+            'telefono_contacto' => ($request->input('telefono')),
+            'indicaciones_adicionales' => ($request->input('indicaciones')),
+            'monto_total' => $carrito["carrito"]["total_a_pagar"],
+        ]);
 
 
         return redirect()->back()->withSuccess("Pedido registrado correctamente");
@@ -123,7 +145,19 @@ class PedidosController extends Controller
     }
 
     public function getProductosPedido($id_pedido){
-        $pedido = Pedidos::find($id_pedido);
+
+        $user_type = session('user')->type;
+        
+        if($user_type != "admin"){
+            //Busca el pedido donde el usuario que esta peticionando (id_usuario) sea igual al id_usuario que esta en id_pedido
+            //Basicamente: si el pedido no es del usuario peticionando, no se lo muestra
+            $pedido = Pedidos::where('id_usuario', session('user')->id_usuario)
+                ->where('id_pedido', $id_pedido)
+                ->first();
+        }
+        else if($user_type == "admin"){
+            $pedido = Pedidos::where('id_pedido', $id_pedido) -> first();
+        }
 
         if(!$pedido){
             return response()->json([
