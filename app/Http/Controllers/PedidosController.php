@@ -72,6 +72,23 @@ class PedidosController extends Controller
         }
     }
 
+    public function entregar(Request $request){
+
+        $id_pedido = $request->input('id_pedido');
+
+        $pedido = Pedidos::find($id_pedido);
+
+        if(!$pedido){
+            return redirect()->back()->with('error', 'No se encontro el pedido');
+        }
+
+        $pedido->estado = "Entregado";
+
+        $pedido->save();
+
+        return redirect()->back()->with('success', 'Pedido entregado');
+    }
+
     public function getProductosPedido($id_pedido){
         $pedido = Pedidos::find($id_pedido);
 

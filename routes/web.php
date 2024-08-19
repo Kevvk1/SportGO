@@ -101,4 +101,6 @@ Route::post('/admin/pedidos/eliminar', [PedidosController::class, 'eliminar'])->
 
 Route::get('/getProductosPedido/{id_pedido}', [PedidosController::class, 'getProductosPedido'])->middleware(['isAdmin']);
 
+Route::post('/admin/pedidos/entregar', [PedidosController::class, 'entregar'])->name('pedido.entregar');
+
 
