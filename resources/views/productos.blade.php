@@ -14,7 +14,6 @@
                 <div class="">
                     <div class="list-group-item d-flex">
                         <div class="card text-center">
-                            <img class="rounded mx-auto d-block img-producto" src="{{ asset(Storage::url($producto->imagen)) }}" style="height: 30%; width: 25%;">
                             <h6 class="card-text" name="codigo_producto">{{ $producto->codigo_producto }}</h6>
                             <h4 class="card-title" name="nombre_producto">{{ $producto->nombre }}</h4>
                             <h5 class="card-text" name="precio_producto">${{ $producto->precio }}</h5>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Productos;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -36,22 +37,23 @@ class ProductController extends Controller
     }
 
 
-    public function modificar(Request $request){
+    public function modificar(Request $request, $codigo_producto_original){
 
-
-        $validatedData = $request -> validate([
-            'nombre_producto_modal' => ['required', 'string', 'max:255'],
-            'descripcion_producto_modal' => ['required', 'string', 'max:255'],
-            'precio_producto_modal' => ['required', 'decimal:0,2'],
-            'cantidad_producto_modal' => ['required', 'numeric'],
-            'codigo_producto_modal' => ['required', 'numeric', 'unique:productos,codigo_producto', 'max:255'], //unique:productos, codigo_producto (le estoy diciendo en que tabla y en que columna chequear que sea unico)
-        ]);
-
-        
         $codigo_producto = $request -> input('codigo_producto_modal');
 
-
         $producto = Productos::find($codigo_producto);
+
+        //Esto no anda
+
+        $validatedData = $request -> validate([
+            'nombre_producto_modal' => ['required', 'max:255'],
+            'descripcion_producto_modal' => ['required', 'max:255'],
+            'precio_producto_modal' => ['required', 'decimal:0,2'],
+            'cantidad_producto_modal' => ['required', 'numeric'],
+            'codigo_producto_modal' => ['required', 'numeric', 'max_digits:255', Rule::unique('productos', 'codigo_producto')->ignore($codigo_producto_original, 'codigo_producto')], //unique:productos, codigo_producto (le estoy diciendo en que tabla y en que columna chequear que sea unico)
+        ]);
+
+
 
 
         if(!$producto){
@@ -61,6 +63,7 @@ class ProductController extends Controller
 
         $producto->codigo_producto = $request->codigo_producto_modal;
         $producto->nombre = $request->nombre_producto_modal;
+        $producto->descripcion = $request->descripcion_producto_modal;
         $producto->precio = $request->precio_producto_modal;
         $producto->stock_disponible = $request->cantidad_producto_modal;
 
@@ -79,19 +82,15 @@ class ProductController extends Controller
             'precio_producto' => ['required', 'decimal:0,2'],
             'stock_producto' => ['required', 'numeric'],
             'codigo_producto' => ['required', 'numeric', 'unique:productos', 'max:255'],
-            'imagen_producto' => ['required', 'max:2048', 'image', 'mimes:jpg,bmp,png,jpeg,webp'],
         ]);
 
-        if($request->file('imagen_producto')->isValid()){
-            $imagen_producto_path = $request->file('imagen_producto')->store('/public/img/productos');
-        }
+
 
         $producto = Productos::create([
             'codigo_producto' => $request->codigo_producto,
             'nombre' => $request->nombre_producto,
             'descripcion' => $request->descripcion_producto,
             'precio' => $request->precio_producto,
-            'imagen' => $imagen_producto_path,
             'stock_disponible' => $request->stock_producto,
         ]);
 

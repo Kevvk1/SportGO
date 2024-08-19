@@ -85,11 +85,7 @@
                             <p>Aqui veras los importes de tu compra una vez que agregues productos</p>
                         @else
                             @foreach($carrito["carrito"]["productos"] as $producto)
-                                <div class="row">
-                                    <div class="col-3">
-                                        <img src="{{ asset(Storage::url($producto['imagen'])) }}" class="img-fluid" style="height:80%; width:80%;"> 
-                                    </div>
-
+                                <div class="row">>
                                     <div class="col-6">
                                         <div class="row">
                                             <div class="col-12">

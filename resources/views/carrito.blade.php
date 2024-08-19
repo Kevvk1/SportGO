@@ -22,10 +22,6 @@
                     @else
                         @foreach($carrito["carrito"]["productos"] as $producto)
                             <div class="row">
-                                <div class="col-3">
-                                    <img src="{{ asset(Storage::url($producto['imagen'])) }}" class="img-fluid" style="height:80%; width:80%;"> 
-                                </div>
-
                                 <div class="col-6">
 
                                     <div class="row">
@@ -79,10 +75,6 @@
                     @else
                         @foreach($carrito["carrito"]["productos"] as $producto)
                             <div class="row">
-                                <div class="col-3">
-                                    <img src="{{ asset(Storage::url($producto['imagen'])) }}" class="img-fluid" style="height:80%; width:80%;"> 
-                                </div>
-
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-12">

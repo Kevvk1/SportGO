@@ -75,7 +75,7 @@ Route::post('/admin/cargar', [ProductController::class, 'cargar'])->name('produc
 
 Route::get('/admin/listado', [ProductController::class, 'indexAdmin'])->name('admin.listado.productos')->middleware(['isAdmin']);
 
-Route::post('/admin/listado/modificar', [ProductController::class, 'modificar'])->name('producto.modificar')->middleware(['isAdmin']);
+Route::post('/admin/listado/modificar/{codigo_producto_original}', [ProductController::class, 'modificar'])->name('producto.modificar')->middleware(['isAdmin']);
 
 Route::post('/admin/listado/eliminar', [ProductController::class, 'eliminar'])->name('producto.eliminar')->middleware(['isAdmin']);
 

@@ -72,6 +72,19 @@ class PedidosController extends Controller
                 'cantidad' => $producto["cantidad"]
             ]);
         }
+        
+
+        $validatedData = $request -> validate([
+            'nombre_apellido' => ['required', 'max:255'],
+            'calle' => ['required', 'max:255'],
+            'altura' => ['required', 'numeric', 'max_digits:9'],
+            'provincia' => ['required', 'max:255'],
+            'localidad' => ['required', 'max:255'],
+            'codigo_postal' => ['required', 'max:255'],
+            'piso_departamento' => ['max:255', 'nullable'],
+            'telefono' => ['required', 'max:255'],
+            'indicaciones' => ['max:255', 'nullable'],
+        ]);
 
         //Creo venta
         $venta = Ventas::create([
