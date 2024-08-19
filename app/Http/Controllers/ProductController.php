@@ -37,7 +37,7 @@ class ProductController extends Controller
     }
 
 
-    public function modificar(Request $request, $codigo_producto_original){
+    public function modificar(Request $request){
 
         $codigo_producto = $request -> input('codigo_producto_modal');
 
@@ -50,18 +50,14 @@ class ProductController extends Controller
             'descripcion_producto_modal' => ['required', 'max:255'],
             'precio_producto_modal' => ['required', 'decimal:0,2'],
             'cantidad_producto_modal' => ['required', 'numeric'],
-            'codigo_producto_modal' => ['required', 'numeric', 'max_digits:255', Rule::unique('productos', 'codigo_producto')->ignore($codigo_producto_original, 'codigo_producto')], //unique:productos, codigo_producto (le estoy diciendo en que tabla y en que columna chequear que sea unico)
+
         ]);
-
-
 
 
         if(!$producto){
             return redirect()->back()->with('error', 'No se encontro el producto');
         }
 
-
-        $producto->codigo_producto = $request->codigo_producto_modal;
         $producto->nombre = $request->nombre_producto_modal;
         $producto->descripcion = $request->descripcion_producto_modal;
         $producto->precio = $request->precio_producto_modal;

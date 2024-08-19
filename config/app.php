@@ -124,7 +124,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'paypal_id' => env('PAYPAL_CLIENT_ID', "<YOUR_PRO_PAYPAL_CLIENT_ID>"),
-    'paypal_secrect' => env('PAYPAL_SECRET',"<YOUR_PRO_PAYPAL_SECRET>"),
+
 
 ];

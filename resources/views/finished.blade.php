@@ -2,30 +2,18 @@
 
 @section('title', 'SportGO - Pago')
 
-@section('head')
-    <script src="https://www.paypal.com/sdk/js?client-id={{config('app')['paypal_id']}}"></script>
-@endsection
-
 @section('main')
-<div id="paypalButtons"></div>
-    <script>
-        paypal.Buttons({
-            createOrder: function(data, actions){
-                return actions.order.create({
-                    purchase_units:[
-                        {
-                            amount: {
-                                value:50
-                            }
-                        }
-                    ]
-                })
-            },
-            onApprove: function(data, actions){
-                // TODO send order to server
-                console.log(data.orderID)
-                axios.post('paypal-process-order/'+data.orderID)
-            }
-        }).render("#paypalButtons");
-    </script>
+
+<div class="container text-center" style="margin-top: 1em;">
+    @if(session('success'))
+        <h1 class="mt-3 text-center">¡Muchas gracias por tu pedido!</h1>
+        <h2 class="mt-3 text-center">En breve podrás ver todos los detalles en la pestaña "Mis pedidos"</h1>
+    @elseif(session('failure'))
+        <h1 class="mt-3 text-center">Hubo un error al procesar tu pago</h1>
+        <h2 class="mt-3 text-center">Lo sentimos! Por favor, vuelve a intentarlo</h1>
+    @elseif(session('pending'))
+        <h1 class="mt-3 text-center">Estamos procesando tu pago</h1>
+        <h2 class="mt-3 text-center">En breve recibirás la confirmación</h1>
+    @endif
+</div>  
 @endsection

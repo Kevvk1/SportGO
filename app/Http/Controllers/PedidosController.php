@@ -97,14 +97,14 @@ class PedidosController extends Controller
             'localidad' => ($request->input('localidad')),
             'codigo_postal' => ($request->input('codigo_postal')),
             'piso_departamento' => ($request->input('piso_departamento')),
-            'metodo_pago' => "Tarjeta de credito",
+            'metodo_pago' => "MercadoPago",
             'telefono_contacto' => ($request->input('telefono')),
             'indicaciones_adicionales' => ($request->input('indicaciones')),
             'monto_total' => $carrito["carrito"]["total_a_pagar"],
         ]);
 
 
-        return redirect()->back()->withSuccess("Pedido registrado correctamente");
+        return redirect()->route('checkout.pagar');
     }
 
     public function eliminar(Request $request){

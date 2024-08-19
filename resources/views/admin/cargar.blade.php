@@ -34,14 +34,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-sm-12 my-4">
+                        <div class="col-lg-12 col-sm-12 my-4">
                             <label for="codigo_producto">Código de producto</label>
                             <input type="text" name="codigo_producto" id="codigo_producto" class="form-control" placeholder="Ingrese el código de producto" aria-label="Código del producto" required>
-                        </div>
-                   
-                        <div class="col-6 mt-4">
-                                <label for="imagen_producto" class="form-label mb-0">Adjunte imagen del producto</label>
-                                <input class="form-control" type="file" name="imagen_producto" id="imagen_producto" accept="image/*">
                         </div>
                     </div>
 

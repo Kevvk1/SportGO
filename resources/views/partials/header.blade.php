@@ -52,13 +52,10 @@
     <nav class="navbar" style="background-color: #d9db26;">
         <div class="container-fluid">
             <div class="row text-center" style="width: 100%;">
-                    <div class="col-4">
+                    <div class="col-6">
                             <a href="/index" style="color: black;">Inicio</a>
                     </div>
-                    <div class="col-4">
-                            <a href="/productos" style="color: black;">Productos</a>
-                    </div>
-                    <div class="col-4">
+                    <div class="col-6">
                             <a href="/pedidos" style="color: black;">Mis pedidos</a>
                     </div>
             </div>

@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserControl;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\VentasController;
+use App\Http\Controllers\PagoController;
+use App\Http\Controllers\MercadoPagoController;
 
 //Route::get('/', function () {
     //return view('index');
@@ -73,10 +75,9 @@ Route::get('/admin/cargar', function () {
 })->name('admin.cargar')->middleware(['isAdmin']);
 Route::post('/admin/cargar', [ProductController::class, 'cargar'])->name('producto.cargar')->middleware(['isAdmin']);
 
+
 Route::get('/admin/listado', [ProductController::class, 'indexAdmin'])->name('admin.listado.productos')->middleware(['isAdmin']);
-
-Route::post('/admin/listado/modificar/{codigo_producto_original}', [ProductController::class, 'modificar'])->name('producto.modificar')->middleware(['isAdmin']);
-
+Route::post('/admin/listado/modificar', [ProductController::class, 'modificar'])->name('producto.modificar')->middleware(['isAdmin']);
 Route::post('/admin/listado/eliminar', [ProductController::class, 'eliminar'])->name('producto.eliminar')->middleware(['isAdmin']);
 
 Route::get('/admin/usuarios', [UserControl::class, 'index'])->name('admin.listado')->middleware(['isAdmin']);
@@ -98,9 +99,13 @@ Route::post('/admin/pedidos/entregar', [PedidosController::class, 'entregar'])->
 
 Route::get('/getProductosPedido/{id_pedido}', [PedidosController::class, 'getProductosPedido'])->name('pedido.obtener.productos');
 
-Route::get('/paypal', function(){
-    return view('paypal');
-});
+
+Route::get('/checkout/pago', [MercadoPagoController::class, 'pay'])->name('checkout.pagar');
+
+
+Route::get('/checkout/pago/success', [MercadoPagoController::class, 'success'])->name('mercadopago.success');
+Route::get('/checkout/pago/failure', [MercadoPagoController::class, 'failure'])->name('mercadopago.failed');
+Route::get('/checkout/pago/pending', [MercadoPagoController::class, 'pending'])->name('mercadopago.pending');
 
 
 
