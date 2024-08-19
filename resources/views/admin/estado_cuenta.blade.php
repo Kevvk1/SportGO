@@ -8,7 +8,7 @@
         <p>No hay ventas registradas</p>
     @else
     <div class="table-responsive mt-5">
-        <table class="table">
+        <table class="table text-center table-striped-columns table-bordered">
             <thead>
                 <tr style="background-color: #d9db26 !important;">
                         <th scope="col">ID_Venta</th>

@@ -9,11 +9,8 @@ use App\Http\Controllers\VentasController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\MercadoPagoController;
 
-//Route::get('/', function () {
-    //return view('index');
-//});
 
-
+Route::get('/', [ProductController::class, 'index'])->name('index');
 
 Route::get('/index', [ProductController::class, 'index'])->name('index');
 Route::post('/index', [AuthControl::class, 'process'])->name('process.user');

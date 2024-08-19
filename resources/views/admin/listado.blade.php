@@ -17,7 +17,7 @@
         <p>No hay productos publicados.</p>
     @else
     <div class="table-responsive mt-5">
-        <table class="table">
+        <table class="table text-center table-striped-columns table-bordered">
             <thead>
                 <tr style="background-color: #d9db26 !important;">
                         <th scope="col">Codigo producto</th>
@@ -85,41 +85,52 @@
 
                         <form id="modifyProduct-form" action="{{ route('producto.modificar') }}" method="POST">
                             @csrf
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="d-block">
-                                            <label for="nombre_producto_modal">Nombre</label>
-                                            <input type="text" style="border: 1px solid white; border-radius: 15px; background-color: white;" name="nombre_producto_modal" id="nombre_producto_modal" class="p-1" value="None">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="d-flex">
-                                            <label for="descripcion_producto_modal">Descripcion</label>
-                                            <input type="text" style="border: 1px solid white; border-radius: 15px; background-color: white;" name="descripcion_producto_modal" id="descripcion_producto_modal" class="p-1" value="None">
-                                        </div>
-                                    </div>
+                            
+                            <div class="row mb-3">
+
+                                <div class="col-6">
+
+                                    <label for="nombre_producto_modal">Nombre</label>
+                                    <input type="text" name="nombre_producto_modal" id="nombre_producto_modal" class="form-control p-1" value="None">
+
                                 </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="d-inlineblock">
-                                            <label for="precio_producto_modal">Precio</label>
-                                            <input type="text" style="border: 1px solid white; border-radius: 15px; background-color: white;" name="precio_producto_modal" id="precio_producto_modal" class="p-2" value="$2.000">
-                                        </div>
-                                    </div>
 
-                                    <div class="col-6">
-                                        <div class="d-inlineblock">
-                                            <label for="cantidad_producto_modal">Cantidad</label>                                                          
-                                            <input type="text" class="form-control" name="cantidad_producto_modal" id="cantidad_producto_modal" value="50" style="border-radius: 15px;">                                                                      
-                                        </div>
-                                    </div>
-                                </div>                                                                                  
-                            </div>                  
-            
+                                <div class="col-6">
 
-                            <div class="container-fluid text-center mt-3 mb-3">
-                                <button class="btn" type="submit" style="background-color: #d9db26; width: 25%; border-radius: 15px;">Guardar</button>
+                                    <label for="descripcion_producto_modal">Descripcion</label>
+                                    <input type="text" name="descripcion_producto_modal" id="descripcion_producto_modal" class="form-control p-1" value="None">
+
+                                </div>
+
+                            </div>
+
+                            <div class="row mb-3">
+
+                                <div class="col-6">
+
+                                    <label for="precio_producto_modal">Descripcion</label>
+                                    <input type="text" name="precio_producto_modal" id="precio_producto_modal" class="form-control p-1" value="$2.000">
+
+                                </div>
+
+                                <div class="col-6">
+
+                                    <label for="cantidad_producto_modal">Cantidad</label>
+                                    <input type="text" class="form-control p-1" name="cantidad_producto_modal" id="cantidad_producto_modal" value="50">      
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row mt-5">
+
+                                <div class="col-4 offset-4 text-center">
+
+                                    <button class="btn p-2" style="background-color: #d9db26;">Guardar</button>
+
+                                </div>
+
                             </div>
 
                         </form>
@@ -134,3 +145,13 @@
 
     @endif
 @endsection
+
+
+
+
+
+
+
+
+
+
