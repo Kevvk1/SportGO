@@ -10,7 +10,7 @@
                 <button type="button" class="btn btn-primary" onclick="location.href='/admin/cargar'">Cargar producto</button>
                 <button type="button" class="btn btn-primary" onclick="location.href='/admin/listado'">Consultar listado de productos</button>
                 <button type="button" class="btn btn-primary" onclick="location.href='/admin/usuarios'">Consultar listado de usuarios</button>
-                <button type="button" class="btn btn-primary">Ver pedidos pendientes</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/admin/pedidos'">Ver pedidos pendientes</button>
                 <button type="button" class="btn btn-primary">Entregar pedidos</button>
                 <button type="button" class="btn btn-primary">Ver estado de cuenta</button>
             </div>

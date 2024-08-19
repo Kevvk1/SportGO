@@ -13,9 +13,6 @@
 
         <form class="form-checkout" method="POST" action="{{ route('pedido.crear') }}">
             @csrf
-            <!-- Campo oculto para id del usuario -->
-            <input type="hidden" name="id_usuario" value="{{ session('user')->id_usuario }}">
-
 
             <button type="submit" class="btn" id="loginbutton" value="login" name="action"> 
                 <h5>Confirmar pedido</h5>

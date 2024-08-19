@@ -33,12 +33,12 @@ class Pedidos extends Model
     const UPDATED_AT = 'fecha_ultima_actualizacion';
 
     public function cliente(){
-        return $this->belongsTo(User::class, 'id_usuario', 'id_pedido');
+        return $this->belongsTo(User::class, 'id_usuario', 'id_usuario'); // 'id_usuario' es la clave foránea, 'id_usuario' es la clave primaria en User
     }
 
     public function productos(){
         return $this->belongsToMany(Productos::class, 'itemsPedido', 'id_pedido', 'id_producto')
-            ->withPivot('cantidad', 'precio')
+            ->withPivot('cantidad')
             ->withTimeStamps();
     }
 }

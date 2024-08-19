@@ -95,5 +95,10 @@ Route::get('/checkout', function () {
 
 Route::post('/checkout/crear', [PedidosController::class, 'create'])->name('pedido.crear');
 
+Route::get('/pedidos', [PedidosController::class, 'index'])->name('listado.pedidos');
+
+Route::post('/admin/pedidos/eliminar', [PedidosController::class, 'eliminar'])->name('pedido.eliminar');
+
+Route::get('/getProductosPedido/{id_pedido}', [PedidosController::class, 'getProductosPedido'])->middleware(['isAdmin']);
 
 
