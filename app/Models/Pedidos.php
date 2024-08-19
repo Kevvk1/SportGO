@@ -19,9 +19,8 @@ class Pedidos extends Model
 
     
     protected $fillable = [
-        'id_pedido',
         'estado',
-        'fecha',
+        'id_usuario'
     ];
 
     protected $primaryKey = 'id_pedido';
@@ -32,4 +31,14 @@ class Pedidos extends Model
 
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_ultima_actualizacion';
+
+    public function cliente(){
+        return $this->belongsTo(User::class, 'id_usuario', 'id_pedido');
+    }
+
+    public function productos(){
+        return $this->belongsToMany(Productos::class, 'itemsPedido', 'id_pedido', 'id_producto')
+            ->withPivot('cantidad', 'precio')
+            ->withTimeStamps();
+    }
 }

@@ -34,4 +34,10 @@ class Productos extends Model
     public $incrementing = false;
 
     protected $keyType = 'integer';
+
+    public function pedidos(){
+        return $this->belongsToMany(Pedidos::class, 'itemsPedido', 'id_pedido', 'id_producto')
+            ->withPivot('cantidad', 'precio')
+            ->withTimeStamps();
+    }
 }

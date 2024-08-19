@@ -116,7 +116,7 @@
 
     <div class="row">
         <div class="container mt-3 text-end">
-            <button class="btn" style="border-radius: 10px; background-color: #d9db26;">FINALIZAR COMPRA</button>
+            <button class="btn" style="border-radius: 10px; background-color: #d9db26;" onclick='location.href="/checkout"'>FINALIZAR COMPRA</button>
         </div>
     </div>
 

@@ -11,11 +11,14 @@
             <h2 style="text-align: center;">{{ session('email_verification_message') }}</h2>
         @endif
 
-        <form class="form-checkout" method="POST" action="{{ route('checkout') }}">
+        <form class="form-checkout" method="POST" action="{{ route('pedido.crear') }}">
             @csrf
-            
+            <!-- Campo oculto para id del usuario -->
+            <input type="hidden" name="id_usuario" value="{{ session('user')->id_usuario }}">
+
+
             <button type="submit" class="btn" id="loginbutton" value="login" name="action"> 
-                <h5>Ingresar</h5>
+                <h5>Confirmar pedido</h5>
             </button>
         </form>
 

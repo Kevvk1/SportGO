@@ -27,6 +27,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'type'
     ];
 
+
+    protected $primaryKey = 'id_usuario';
+
+    public $incrementing = true;
+
+    protected $keyType = 'integer';
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -48,5 +54,10 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function pedidos(){
+        return $this->hasMany(Pedidos::class, 'id_usuario', 'id_pedido');
     }
 }

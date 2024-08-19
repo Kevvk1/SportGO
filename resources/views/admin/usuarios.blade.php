@@ -26,7 +26,7 @@
             <tbody>
                 @foreach($usuarios as $usuario)
                 <tr>
-                    <th scope="row">{{$usuario -> id}}</th>
+                    <th scope="row">{{$usuario -> id_usuario}}</th>
                     <td>{{$usuario -> nombres}}</td>
                     <td>{{$usuario -> apellidos}}</td>
                     <td>{{$usuario -> dni}}</td>
@@ -47,7 +47,7 @@
                                 </button>
                             @endif
                             <!-- Campo oculto para id del usuario -->
-                            <input type="hidden" name="id_usuario" value="{{ $usuario->id }}">
+                            <input type="hidden" name="id_usuario" value="{{ $usuario->id_usuario }}">
                         </form>
                     </td>
                 </tr>

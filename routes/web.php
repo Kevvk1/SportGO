@@ -89,3 +89,11 @@ Route::post('/admin/usuarios', [UserControl::class, 'cambiarTipo'])->name('admin
 
 Route::get('/admin/pedidos', [PedidosController::class, 'indexAdmin'])->name('admin.listado.pedidos')->middleware(['isAdmin']);
 
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
+
+Route::post('/checkout/crear', [PedidosController::class, 'create'])->name('pedido.crear');
+
+
+
