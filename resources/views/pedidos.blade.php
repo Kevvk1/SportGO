@@ -8,7 +8,7 @@
         <p>No hay pedidos registrados</p>
     @else
     <div class="table-responsive mt-5">
-        <table class="table">
+        <table class="table text-center table-striped-columns table-bordered">
             <thead>
                 <tr style="background-color: #d9db26 !important;">
                         <th scope="col">ID_Pedido</th>
@@ -16,7 +16,6 @@
                         <th scope="col">Fecha de creacion</th>
                         <th scope="col">Ultima actualizacion</th>
                         <th scope="col">Productos del pedido</th>
-                        <th scope="col">Modificar pedido</th>
                         <th scope="col">Eliminar pedido</th>
                 </tr>
             </thead>
@@ -32,12 +31,6 @@
                         <button class='btn btn-success' id='boton_ver_productos' name='boton_ver_productos' onclick='VerProductos("{{$pedido->id_pedido}}")'>
                             <h6>Ver</h6>
                         </button>
-                    </td>
-                    <td>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="48" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" onclick="" style="border-radius: 10px; background-color: #d9db26;">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                        </svg>
                     </td>
 
                     <td>
