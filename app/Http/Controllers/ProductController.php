@@ -15,10 +15,12 @@ class ProductController extends Controller
         return view('index', compact('productos'));
     }
 
+    
     public function indexAdmin(){
         $productos = Productos::all();
         return view('admin/listado', compact('productos'));
     }
+
 
     public function getProducto($codigo_producto){
         $producto = Productos::find($codigo_producto);
@@ -32,6 +34,7 @@ class ProductController extends Controller
             return response()->json([$producto]);
         }
     }
+
 
     public function modificar(Request $request){
 
@@ -54,9 +57,9 @@ class ProductController extends Controller
 
         $producto -> save();
 
-
         return redirect()->back()->with('success', 'Producto modificado exitosamente');
     }
+
 
     public function cargar(Request $request){
 
@@ -85,8 +88,8 @@ class ProductController extends Controller
         $producto->save();
 
         return redirect()->route('admin.cargar')->withSuccess("Producto cargado exitosamente");
-
     }
+
 
     public function eliminar(Request $request){
 
@@ -98,9 +101,7 @@ class ProductController extends Controller
             $producto->delete();
 
             return redirect()->back()->with('success', 'Producto eliminado correctamente');
-        }
-
-        
+        } 
     }
 
     
@@ -158,7 +159,6 @@ class ProductController extends Controller
         //Obtiene el carrito actual de la sesion
         $carrito = session()->get('carrito', ['carrito' => ['productos' => [], 'total_a_pagar' => 0]]);
 
-
         //Crea array con el producto
         $carrito["carrito"]["productos"]["producto_".$codigo_producto] = [
             'codigo' => $producto->codigo_producto,
@@ -171,7 +171,6 @@ class ProductController extends Controller
 
         session()->put('carrito', $carrito);
 
-        
         return redirect()->back()->with('success', 'Producto agregado al carrito');
     }
 
@@ -183,19 +182,26 @@ class ProductController extends Controller
         //Carrito actual
         $carrito = session()->get('carrito', ['carrito' => ['productos' => [], 'total_a_pagar' => 0]]);
 
-        //Recorrido sobre los productos para sumar el precio total de cada uno
-        foreach($carrito["carrito"]["productos"] as $producto){
-            $total += $producto["precio_total"];
+        if(count($carrito["carrito"]["productos"])!=0){
+
+            //Recorrido sobre los productos para sumar el precio total de cada uno
+            foreach($carrito["carrito"]["productos"] as $producto){
+                $total += $producto["precio_total"];
+            }
+
+            //Actualizo total a pagar
+            $carrito["carrito"]["total_a_pagar"] = $total;
+
+            //Pusheo carrito actualizado a la sesion
+            session(['carrito' => $carrito]);
+
+            return view('carrito')->with('carrito', $carrito);
         }
-
-        //Actualizo total a pagar
-        $carrito["carrito"]["total_a_pagar"] = $total;
-
-        //Pusheo carrito actualizado a la sesion
-        session(['carrito' => $carrito]);
-
-        return view('carrito')->with('carrito', $carrito);
+        else{
+            return view('carrito')->with('carrito'); //Devuelvo la variable carrito vacia
+        }  
     }
+
 
     public function deleteCurrentCart(Request $request){
 

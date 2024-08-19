@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pedidos;
 use App\Models\User;
+use App\Models\PedidosPendientes;
+use App\Models\PedidosFinalizados;
 
 
 class PedidosController extends Controller
@@ -21,9 +23,14 @@ class PedidosController extends Controller
     }
 
 
-    public function indexAdmin(){
-        $pedidos = Pedidos::all();
+    public function indexAdminPendientes(){
+        $pedidos = Pedidos::where('estado', "Pendiente de entrega")->get();
         return view('admin/pedidos', compact('pedidos'));
+    }
+
+    public function indexAdminHistorico(){
+        $pedidos = Pedidos::where('estado', "Entregado")->get();
+        return view('admin/pedidos_historico', compact('pedidos'));
     }
 
     public function create(Request $request){
@@ -44,6 +51,12 @@ class PedidosController extends Controller
         ]);
 
         $pedido->save();
+
+        //Creo el pedido tambien en pedidos_pendientes -conectado con claves foraneas-
+        PedidosPendientes::create([
+            'id_pedido' => $pedido->id_pedido,
+            'id_usuario' => $pedido->id_usuario,
+        ]);
 
         //Obtengo carrito de la sesion
         $carrito = session()->get('carrito', ['carrito' => ['productos' => [], 'total_a_pagar' => 0]]);
@@ -85,6 +98,26 @@ class PedidosController extends Controller
         $pedido->estado = "Entregado";
 
         $pedido->save();
+
+
+        $pedido_pendiente = PedidosPendientes::where('id_pedido', $id_pedido)->first();
+
+        if (!$pedido_pendiente) {
+            return response()->json([
+                'error' => 'No se encontró el pedido en pedidos pendientes'
+            ], 404);
+        }
+
+        //Creo el pedido en pedidos_finalizados -conectado con claves foraneas-
+        PedidosFinalizados::create([
+            'id_pedido' => $pedido->id_pedido,
+            'id_usuario' => $pedido->id_usuario
+        ]);
+
+        //Elimino el pedido de pedidos_pendientes
+        $pedido_pendiente -> delete();
+
+
 
         return redirect()->back()->with('success', 'Pedido entregado');
     }

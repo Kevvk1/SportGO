@@ -37,8 +37,17 @@ class Pedidos extends Model
     }
 
     public function productos(){
-        return $this->belongsToMany(Productos::class, 'itemsPedido', 'id_pedido', 'id_producto')
+        return $this->belongsToMany(Productos::class, 'items_pedido', 'id_pedido', 'id_producto') // 'items_pedido' es la tabla pivote, 'id_pedido' es la columna en la tabla pivote que hace referencia a la clave primaria de la tabla 'pedidos', 'id_producto' es la columna en la tabla pivote que hace referencia a la clave primaria de la tabla 'productos'
             ->withPivot('cantidad')
             ->withTimeStamps();
     }
+
+    public function pedidoPendiente(){
+        return $this->hasOne(PedidosPendientes::class, 'id_pedido', 'id_pedido');
+    }
+
+    public function pedidoFinalizado(){
+        return $this->hasOne(PedidosFinalizados::class, 'id_pedido', 'id_pedido');
+    }
 }
+

@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('items_pedido', function (Blueprint $table) {
-            $table->id('id_items_pedido');
+        Schema::create('pedidos_finalizados', function (Blueprint $table) {
+            $table->id('id_pedido_finalizado');
             $table->unsignedBigInteger('id_pedido');
-            $table->unsignedBigInteger('id_producto');
-            $table->integer('cantidad');
+            $table->unsignedBigInteger('id_usuario');
             $table->timestamp('fecha_creacion')->useCurrent();
             $table->timestamp('fecha_ultima_actualizacion')->useCurrent();
 
@@ -24,9 +23,9 @@ return new class extends Migration
                 ->on('pedidos')
                 ->onDelete('cascade');
 
-            $table->foreign('id_producto')
-                ->references('codigo_producto')
-                ->on('productos')
+            $table->foreign('id_usuario')
+                ->references('id_usuario')
+                ->on('users')
                 ->onDelete('cascade');
         });
     }
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items_edido');
+        Schema::dropIfExists('pedidos_finalizados');
     }
 };
