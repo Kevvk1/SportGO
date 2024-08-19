@@ -78,12 +78,10 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color: #f1f1f1; border-radius: 15px;">
                 <div class="modal-body">
+
                     <h4 class="text-center">Productos del pedido</h4>
+                    <ul id="listado_productos_modal" class="list-unstyled" style="list-style-type: none;"></ul>
 
-                    <ul id="listado_productos_modal">
-                    </ul>
-
-        
                 </div>
             </div>
         </div>
