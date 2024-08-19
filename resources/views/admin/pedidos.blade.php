@@ -68,6 +68,23 @@
         </table>
     </div>
 
+
+
+    <div class="modal fade" id="ver-productos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="background-color: #f1f1f1; border-radius: 15px;">
+                <div class="modal-body">
+                    <h4 class="text-center">Productos del pedido</h4>
+
+                    <ul id="listado_productos_modal">
+                    </ul>
+
+        
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ asset('js/admin.pedidos.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     @endif
