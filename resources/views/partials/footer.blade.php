@@ -60,8 +60,27 @@
 
     <!-- Copyright -->
     <div class="text-center p-4">
-        © 2024 Copyright:
-        <a class="text-reset fw-bold" style="color: white;" href="https://sportgo.com">SportGO.com</a>
+        <hr class="border-white">
+        <p style="color: white; margin-bottom: 20px;">Hecho con ❤️ para la Olimpíada Nacional de Educación Técnico Profesional 2024</p>
+        <div style="margin-bottom: 20px;">
+            <span style="color: white;">Castellano, Kevin Alexis</span>
+            <span style="color: gray; margin-left: 10px; margin-right: 10px;">|</span>
+            <span style="color: white;">Pavon, Leonel Ernesto</span>
+            <span style="color: gray; margin-left: 10px; margin-right: 10px;">|</span>
+            <span style="color: white;">Potaschnik Garbin, Tatiana</span>
+            <span style="color: gray; margin-left: 10px; margin-right: 10px;">|</span>
+            <span style="color: white;">Sebriano Brandan, Emanuel</span>
+        </div>
+        <hr class="border-white">
+        <div class="row">
+            <div class="col-6">
+                <span>© 2024 Copyright:</span>
+                <a class="text-reset fw-bold" style="color: white;" href="https://sportgo.com">SportGO.com</a>
+            </div>
+            <div class="col-6">
+                <span>E.E.S.T Nº6 "Chacabuco" - Morón, Buenos Aires, Argentina</span>
+            </div>
+        </div>
     </div>
     <!-- Copyright -->
 </footer>
