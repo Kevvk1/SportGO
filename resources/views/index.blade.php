@@ -12,7 +12,11 @@
 
     <h1 class="mt-3 text-center">Listado de productos publicados</h1>
     @if($productos->isEmpty())
-        <p>No hay productos publicados.</p>
+        
+        <div class="container-fluid text-center mt-5">
+            <p class="fs-5">No hay productos disponibles en este momento</p>
+        </div>
+        
     @else
     <div class="table-responsive mt-5 me-3 ms-3 ">
         <table class="table table-striped-columns table-bordered  text-center w-100" style="border-radius:3rem;">
