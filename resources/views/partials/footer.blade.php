@@ -8,7 +8,7 @@
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
                     <h6 class="text-uppercase fw-bold mb-4">
-                        <img src="{{ asset('img/sportgo.png') }}" class="img-fluid logo" style="width: 70%;">
+                        <img src="{{ asset('public/img/sportgo.png') }}" class="img-fluid logo" style="width: 70%;">
                     </h6>
                     <p style="color: white;"><i class="fas fa-home me-3" style="color: white;"></i>Av. Rivadavia 17327 - Morón (B1708), Provincia de Buenos Aires, Argentina</p>
                     <p style="color: white;">
@@ -65,7 +65,7 @@
         <div style="margin-bottom: 20px;">
             <span style="color: white;">Castellano, Kevin Alexis</span>
             <span style="color: gray; margin-left: 10px; margin-right: 10px;">|</span>
-            <span style="color: white;">Pavon, Leonel Ernesto</span>
+            <span style="color: white;">Pavon Aguilar, Leonel Ernesto</span>
             <span style="color: gray; margin-left: 10px; margin-right: 10px;">|</span>
             <span style="color: white;">Potaschnik Garbin, Tatiana</span>
             <span style="color: gray; margin-left: 10px; margin-right: 10px;">|</span>
@@ -75,7 +75,7 @@
         <div class="row">
             <div class="col-6">
                 <span style="color: lightgray;">© 2024 Copyright:</span>
-                <a class="" style="color: lightgray;" href="https://sportgo.com">SportGO.com</a>
+                <a class="" style="color: lightgray;" href="https://sportgo.store">SportGO.store</a>
             </div>
             <div class="col-6">
                 <span style="color: lightgray;">E.E.S.T Nº6 "Chacabuco" - Morón, Buenos Aires, Argentina</span>
