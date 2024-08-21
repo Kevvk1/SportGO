@@ -42,7 +42,7 @@ class AuthControl extends Controller
             'fecha_nacimiento' => ['required', 'date'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
             'sexo' => ['required'],
-            'password' => ['required', 'min:8', 'confirmed'],
+            'password' => ['required', 'min:f', 'confirmed'],
         ]);
 
 
