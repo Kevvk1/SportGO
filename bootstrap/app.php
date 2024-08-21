@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'isAdmin' => \App\Http\Middleware\IsAdmin::class,
+            'hasCarrito' => \App\Http\Middleware\hasCarrito::class,
         ]);
         //
     })

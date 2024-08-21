@@ -11,7 +11,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-8 mt-4 text-center">
+            <div class="col-8 mt-4">
                 <div class="container overflow-y-auto" style="border:1px solid gray ; border-radius: 15px; height: 15em;">
                     @if(!$carrito)
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cart mt-4" viewBox="0 0 16 16" style="color:gray; cursor:pointer;" id="buyCart-icon">
@@ -26,7 +26,7 @@
 
                                     <div class="row">
                                         <div class="col-12">
-                                            <p>{{ $producto['nombre'] }}</p>
+                                            <h3>{{ $producto['nombre'] }}</h3>
                                         </div>      
                                     </div>
 
@@ -34,21 +34,12 @@
                                         <div class="col-12">                                 
                                             <div class="container-fluid" style="display: flex;">                                                       
                                                 <div class="row">                                            
-                                                    <div class="col-3" id="minusQuantity" onclick="restar()">                  
-                                                        <svg xmlns="http://www.w3.org/2000/svg"  width="26" height="26" fill="black" class="bi bi-dash" style="background-color:rgb(252, 68, 68); border: 1px solid black; cursor:pointer;" viewBox="0 0 16 16">
-                                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-                                                        </svg>
+
+                                                    <div class="col-6 d-flex">   
+                                                        <h5>Cantidad:</h5>                      
+                                                        <p id="cantidad" class="ms-2">{{ $producto['cantidad'] }}</p>
                                                     </div>
 
-                                                    <div class="col-6">                         
-                                                        <p id="cantidad">{{ $producto['cantidad'] }}</p>
-                                                    </div>
-
-                                                    <div class="col-3" id="plusQuantity" onclick="sumar()">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" style="background-color: rgb(32, 204, 32); border: 1px solid black; cursor:pointer;" class="bi bi-plus" viewBox="0 0 16 16">
-                                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                                                        </svg>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,19 +97,28 @@
         </div>
     </div>
 
-    @if($carrito)
+    @if($carrito && session('user'))
         <div class="row">
             <div class="container mt-3 text-end">
                 <button class="btn" style="border-radius: 10px; background-color: #d9db26;" onclick='location.href="/checkout"'>FINALIZAR COMPRA</button>
             </div>
         </div>
+    @else
 
         <div class="row">
             <div class="container mt-3 text-end">
-                <button class="btn" style="border-radius: 10px; background-color: #red;" onclick="document.getElementById('deleteCart-form').submit(); return false;">ELIMINAR CARRITO</button>
+                <h5>Inicie sesión para poder continuar</h5>
+                <button class="btn disabled" style="border-radius: 10px; background-color: #d9db26;">FINALIZAR COMPRA</button>
             </div>
         </div>
+        
     @endif
+
+        <div class="row">
+            <div class="container mt-3 text-end">
+                <button class="btn" style="border-radius: 10px; background-color: lightcoral;" onclick="document.getElementById('deleteCart-form').submit(); return false;">ELIMINAR CARRITO</button>
+            </div>
+        </div>
     
     <form id="deleteCart-form" action="{{ route('eliminar.carrito') }}" method="POST">
         @csrf

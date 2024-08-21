@@ -103,7 +103,7 @@ class MercadoPagoController extends Controller
             return $preference;
         } catch (MPApiException $error) {
 
-            dd($error);
+            return response()->json($error);
         }
     }
 

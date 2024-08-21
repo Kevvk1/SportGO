@@ -74,11 +74,11 @@
         <hr class="border-white">
         <div class="row">
             <div class="col-6">
-                <span>© 2024 Copyright:</span>
-                <a class="text-reset fw-bold" style="color: white;" href="https://sportgo.com">SportGO.com</a>
+                <span style="color: lightgray;">© 2024 Copyright:</span>
+                <a class="" style="color: lightgray;" href="https://sportgo.com">SportGO.com</a>
             </div>
             <div class="col-6">
-                <span>E.E.S.T Nº6 "Chacabuco" - Morón, Buenos Aires, Argentina</span>
+                <span style="color: lightgray;">E.E.S.T Nº6 "Chacabuco" - Morón, Buenos Aires, Argentina</span>
             </div>
         </div>
     </div>

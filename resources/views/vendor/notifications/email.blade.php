@@ -14,7 +14,7 @@
                 <tr>
                     <td style="padding: 20px;">
                         <div style="text-align: center;">
-                            <img src="{{ asset('public/img/sportgo.png') }}" alt="Logo SportGO" style="width: 30%; max-width: 150px;">
+                            <img src="{{ asset('img/sportgo.png') }}" alt="Logo SportGO" style="width: 30%; max-width: 150px;">
                         </div>
                     </td>
                 </tr>

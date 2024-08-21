@@ -8,7 +8,7 @@ use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\VentasController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\MercadoPagoController;
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
@@ -85,9 +85,16 @@ Route::get('/admin/pedidos/historico', [PedidosController::class, 'indexAdmin'])
 
 Route::get('/admin/estadocuenta', [VentasController::class, 'index'])->name('estado.cuenta')->middleware(['isAdmin']);
 
-Route::get('/checkout', [ProductController::class, 'getCurrentCart'])->name('checkout');
+Route::get('/checkout', [ProductController::class, 'getCurrentCart'])->name('checkout')->middleware(['auth']);
 
-Route::post('/checkout/crear', [PedidosController::class, 'create'])->name('pedido.crear');
+Route::post('/checkout/crear', [PedidosController::class, 'create'])->name('pedido.crear')->middleware(['auth']);
+
+Route::get('/checkout/pago', [MercadoPagoController::class, 'pay'])->name('checkout.pagar')->middleware(['auth', 'hasCarrito']);
+
+Route::get('/checkout/pago/success', [MercadoPagoController::class, 'success'])->name('mercadopago.success')->middleware(['auth']);
+Route::get('/checkout/pago/failure', [MercadoPagoController::class, 'failure'])->name('mercadopago.failed')->middleware(['auth']);
+Route::get('/checkout/pago/pending', [MercadoPagoController::class, 'pending'])->name('mercadopago.pending')->middleware(['auth']);
+
 
 Route::get('/pedidos', [PedidosController::class, 'index'])->name('listado.pedidos');
 
@@ -97,12 +104,6 @@ Route::post('/admin/pedidos/entregar', [PedidosController::class, 'entregar'])->
 Route::get('/getProductosPedido/{id_pedido}', [PedidosController::class, 'getProductosPedido'])->name('pedido.obtener.productos');
 
 
-Route::get('/checkout/pago', [MercadoPagoController::class, 'pay'])->name('checkout.pagar');
-
-
-Route::get('/checkout/pago/success', [MercadoPagoController::class, 'success'])->name('mercadopago.success');
-Route::get('/checkout/pago/failure', [MercadoPagoController::class, 'failure'])->name('mercadopago.failed');
-Route::get('/checkout/pago/pending', [MercadoPagoController::class, 'pending'])->name('mercadopago.pending');
 
 
 

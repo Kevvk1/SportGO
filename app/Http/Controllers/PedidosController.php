@@ -16,11 +16,23 @@ class PedidosController extends Controller
 
     public function index(Request $request){
 
-        $id_usuario = session()->get('user', [])->id_usuario;
-        
-        $pedidos = Pedidos::where('id_usuario', $id_usuario)->get();
-
-        return view('pedidos', ['pedidos' => $pedidos]);
+      $user = session()->get('user');
+  
+      if (!$user) {
+          // Redirigir al usuario o mostrar un mensaje de error
+          return redirect()->route('login')->with('error', 'Debes iniciar sesión para ver tus pedidos.');
+      }
+  
+      // Acceder a la propiedad id_usuario de manera segura
+      $id_usuario = $user->id_usuario ?? null;
+  
+      if (!$id_usuario) {
+          return redirect()->route('login')->with('error', 'Usuario no válido.');
+      }
+  
+      $pedidos = Pedidos::where('id_usuario', $id_usuario)->get();
+  
+      return view('pedidos', ['pedidos' => $pedidos]);
     }
 
 
