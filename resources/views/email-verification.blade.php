@@ -9,7 +9,7 @@
         <div class="row">
 
             <div class="col-4">
-                <img src="{{ asset('img/sportgoblack.png') }}" class="img-fluid mx-auto" alt="Logo ReVi" style="width: 30%;">
+                <img src="{{ asset('img/sportgoblack.png') }}" class="img-fluid mx-auto" alt="Logo SportGO" style="width: 30%;">
             </div>
 
             <div class="col-8 d-flex justify-content-end my-5">

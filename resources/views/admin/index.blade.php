@@ -6,7 +6,7 @@
     <h1 style="text-align: center;">Panel de administrador</h1>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 d-flex justify-content-center my-5">
+            <div class="col-12 justify-content-center my-5">
                 <button type="button" class="btn btn-primary" onclick="location.href='/admin/cargar'">Cargar producto</button>
                 <button type="button" class="btn btn-primary" onclick="location.href='/admin/listado'">Consultar listado de productos</button>
                 <button type="button" class="btn btn-primary" onclick="location.href='/admin/usuarios'">Consultar listado de usuarios</button>

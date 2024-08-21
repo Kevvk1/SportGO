@@ -33,8 +33,14 @@
                             <input type="text" class="form-control" id="nombre_apellido" name="nombre_apellido" aria-describedby="nombre y apellido" placeholder="Nombre y apellido">
                         </div>
 
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" aria-describedby="Codigo postal" placeholder="Codigo postal">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <input type="text" class="form-control" id="calle" name="calle" aria-describedby="calle" placeholder="Calle">
+                            </div>
+
+                            <div class="col-6">                      
+                                <input type="text" class="form-control" id="altura" name="altura" aria-describedby="altura" placeholder="Altura">
+                            </div>
                         </div>
 
                         <div class="row mb-3">
@@ -47,16 +53,9 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <input type="text" class="form-control" id="calle" name="calle" aria-describedby="calle" placeholder="Calle">
-                            </div>
-
-                            <div class="col-6">                      
-                                <input type="text" class="form-control" id="altura" name="altura" aria-describedby="altura" placeholder="Altura">
-                            </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" aria-describedby="Codigo postal" placeholder="Codigo postal">
                         </div>
-
                         <div class="row mb-3">
                             <div class="col-6">
                                 <input type="text" class="form-control" id="piso_departamento" name="piso_departamento" aria-describedby="piso/departamento" placeholder="Piso/departamento (opcional)">

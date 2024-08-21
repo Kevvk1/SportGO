@@ -122,6 +122,8 @@
 
                             </div>
 
+                            <!-- Campo oculto para código del producto -->
+                            <input type="hidden" name="codigo_producto_modal" value="{{ $producto->codigo_producto }}">
 
                             <div class="row mt-5">
 

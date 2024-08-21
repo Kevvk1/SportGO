@@ -31,7 +31,6 @@ class MercadoPagoController extends Controller
 
     }
 
-        // Function that will return a request object to be sent to Mercado Pago API
     public function createPreferenceRequest($items, $payer): array
     {
         $paymentMethods = [
@@ -82,7 +81,6 @@ class MercadoPagoController extends Controller
         }
         
 
-        // Retrieve information about the user (use your own function)
         $user = session('user');
 
 
@@ -92,22 +90,19 @@ class MercadoPagoController extends Controller
             "email" => $user->email,
         );
 
-        // Create the request object to be sent to the API when the preference is created
         $request = $this->createPreferenceRequest($items, $comprador);
 
 
-        // Instantiate a new Preference Client
         $client = new PreferenceClient();
 
         try {
-            // Send the request that will create the new preference for user's checkout flow
+
             $preference = $client->create($request);
 
-            // Useful props you could use from this object is 'init_point' (URL to Checkout Pro) or the 'id'
+
             return $preference;
         } catch (MPApiException $error) {
-            // Here you might return whatever your app needs.
-            // We are returning null here as an example.
+
             dd($error);
         }
     }
