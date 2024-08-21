@@ -23,11 +23,11 @@ class AppServiceProvider extends ServiceProvider
     {
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
-                ->subject('Verifica tu correo electrónico')
+                ->subject('Verifica tu correo electronico')
                 ->greeting('Hola, '.$notifiable->nombres)
-                ->line('Por seguridad, necesitamos confirmar que este es tu correo electrónico')
+                ->line('Por seguridad, necesitamos confirmar que este es tu correo electronico')
                 ->line('Por favor, haz click en el botón debajo para confirmarlo y comenzar a utilizar nuestro sistema')
-                ->action('Click aquí para verificar tu correo electrónico', $url)
+                ->action('Click aqui para verificar tu correo electrónico', $url)
                 ->salutation('Saludos');
         });
 
