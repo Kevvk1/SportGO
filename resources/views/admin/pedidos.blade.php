@@ -5,7 +5,9 @@
 @section('main')
     <h1 class="mt-3 text-center">Listado de pedidos pendientes</h1>
     @if($pedidos->isEmpty())
-        <p>No hay pedidos registrados</p>
+        <div class="container-fluid text-center mt-5">
+            <p class="fs-5">No hay pedidos disponibles en este momento</p>
+        </div>
     @else
     <div class="table-responsive mt-5">
         <table class="table text-center table-striped-columns table-bordered">

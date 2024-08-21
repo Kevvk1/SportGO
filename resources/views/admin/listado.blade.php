@@ -14,7 +14,17 @@
 @endif
     <h1 class="mt-3 text-center">Listado de productos publicados</h1>
     @if($productos->isEmpty())
-        <p>No hay productos publicados.</p>
+        <div class="container-fluid text-center mt-5">
+            <p class="fs-3">No hay productos publicados</p>
+
+            <div class="mt-5">
+
+                <p>Toque el boton de abajo para publicar un producto</p>
+                <button type="button" class="btn btn-primary" onclick="location.href='/admin/cargar'">Cargar producto</button>
+
+            </div>
+            
+        </div>
     @else
     <div class="table-responsive mt-5">
         <table class="table text-center table-striped-columns table-bordered">
